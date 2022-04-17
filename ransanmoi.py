@@ -40,6 +40,7 @@ class conran:
         #bên phải là 0, trên là 1, trái là 2 và xuống dưới là 3
         if pygame.time.get_ticks() - self.actiontime > 100:
             self.actiontime = pygame.time.get_ticks()
+            dutru = self.L_duoi[0]
             self.L_duoi.pop(0)
             self.L_duoi.append((self.x,self.y))
             if self.huong == 0:
@@ -58,7 +59,10 @@ class conran:
                 self.y += 1
                 if self.y > 19:
                     self.y = 0
-
+            if (self.x,self.y) == (thucan1.x,thucan1.y):
+                self.L_duoi.insert(0,dutru)
+                thucan1.x = randint(0,19)
+                thucan1.y = randint(0,19)
 def action():
     main.action()
 
@@ -77,8 +81,8 @@ for y in range(20):
 
 def draw():
     sc.blit(background,(0,0))
-    main.draw()
     thucan1.draw()
+    main.draw()
     pygame.display.update()
 
 from random import randint
