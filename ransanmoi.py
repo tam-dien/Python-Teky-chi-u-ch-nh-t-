@@ -26,7 +26,7 @@ class conran:
             if e.key == pygame.K_LEFT:
                 if self.huong != 0:
                     self.huong = 2
-            if e.key == pygame.K_RIGHT:s
+            if e.key == pygame.K_RIGHT:
                 if self.huong != 2:
                     self.huong = 0
     def action(self):
