@@ -4,6 +4,13 @@ pygame.init()
 
 sc = pygame.display.set_mode((400,400))
 
+class thucan():
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+    def draw(self):
+        pygame.draw.rect(sc,(0,0,150),(self.x*20,self.y*20,20,20))
+
 class conran:
     def __init__(self,x,y):
         self.x = x
@@ -71,10 +78,12 @@ for y in range(20):
 def draw():
     sc.blit(background,(0,0))
     main.draw()
+    thucan1.draw()
     pygame.display.update()
 
 from random import randint
 main = conran(randint(0,19),randint(0,19))
+thucan1 = thucan(randint(0,19),randint(0,19))
 
 run = True
 while run:
