@@ -3,6 +3,7 @@ import pygame
 pygame.init()
 
 sc = pygame.display.set_mode((400,400))
+thua = False
 
 class thucan():
     def __init__(self,x,y):
@@ -63,8 +64,13 @@ class conran:
                 self.L_duoi.insert(0,dutru)
                 thucan1.x = randint(0,19)
                 thucan1.y = randint(0,19)
+            if (self.x,self.y) in self.L_duoi:
+                global thua
+                thua = True
+
 def action():
-    main.action()
+    if not thua:
+        main.action()
 
 def event():
     global run
