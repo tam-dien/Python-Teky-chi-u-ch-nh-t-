@@ -4,6 +4,14 @@ pygame.init()
 
 sc = pygame.display.set_mode((400,400))
 thua = False
+font  = pygame.font.SysFont("arial",50)
+font_20  = pygame.font.SysFont("arial",20)
+chu_thua = font.render("You Lose!",True,(255,0,0))
+cochu_n = chu_thua.get_width()
+cochu_c = chu_thua.get_height()
+x_chu_thua = 200 - cochu_n/2
+y_chu_thua = 200 - cochu_c/2
+score = 0
 
 class thucan():
     def __init__(self,x,y):
@@ -64,6 +72,11 @@ class conran:
                 self.L_duoi.insert(0,dutru)
                 thucan1.x = randint(0,19)
                 thucan1.y = randint(0,19)
+                while (thucan1.x,thucan1.y) in self.L_duoi:
+                    thucan1.x = randint(0,19)
+                    thucan1.y = randint(0,19)
+                global score
+                score += 1
             if (self.x,self.y) in self.L_duoi:
                 global thua
                 thua = True
@@ -71,6 +84,10 @@ class conran:
 def action():
     if not thua:
         main.action()
+
+def draw_diem():
+    img_diem = font_20.render("Score:"+str(score),True,(255,255,255))
+    sc.blit(img_diem,(0,0))
 
 def event():
     global run
@@ -84,17 +101,22 @@ def event():
                 if thua:
                     thua = False
                     main = conran(randint(0,19),randint(0,19))
+                    global score
+                    score = 0
         main.event(e)
 ## Tạo background
 background = pygame.Surface((400,400))
-for y in range(20):
-    for i in range(20):
-        pygame.draw.rect(background,(255,255,255),(i*20,y*20,20,20),1)
+# for y in range(20):
+#     for i in range(20):
+#         pygame.draw.rect(background,(255,255,255),(i*20,y*20,20,20),1)
 
 def draw():
     sc.blit(background,(0,0))
     thucan1.draw()
     main.draw()
+    if thua:
+        sc.blit(chu_thua,(x_chu_thua,y_chu_thua))
+    draw_diem()
     pygame.display.update()
 
 from random import randint
