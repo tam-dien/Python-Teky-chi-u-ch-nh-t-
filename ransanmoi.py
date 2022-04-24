@@ -78,6 +78,12 @@ def event():
         if e.type == pygame.QUIT:
             pygame.quit()
             run = False
+        if e.type == pygame.KEYDOWN:
+            if e.key == pygame.K_SPACE:
+                global thua, main
+                if thua:
+                    thua = False
+                    main = conran(randint(0,19),randint(0,19))
         main.event(e)
 ## Tạo background
 background = pygame.Surface((400,400))
