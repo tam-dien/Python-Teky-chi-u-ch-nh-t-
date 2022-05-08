@@ -28,11 +28,17 @@ class khoi:
         self.type = random.randint(1,7)
         if self.type == 1:
             rd_x = random.randint(0,8)
-            self.L_block = [(rd_x,-1),(rd_x+1,-1),(rd_x+1,0),(rd_x,0)]
+            self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]]
+        self.time_action = 0
     def draw(self):
         for x,y in self.L_block:
             pygame.draw.rect(sc,L_color[self.type],(x*30,y*30,30,30))
             pygame.draw.rect(sc,L_color_vien[self.type],(x*30,y*30,30,30),2)
+    def action(self):
+        if pygame.time.get_ticks() - self.time_action > 200:
+            self.time_action = pygame.time.get_ticks()
+            for i in range(len(self.L_block)):
+                self.L_block[i][1] -= 1
 
 L_diagram = []
 for i in range(20):
