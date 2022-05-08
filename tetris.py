@@ -26,6 +26,7 @@ import random
 class khoi:
     def __init__(self):
         self.type = random.randint(1,7)
+        self.type = 1
         if self.type == 1:
             rd_x = random.randint(0,8)
             self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]]
@@ -38,7 +39,7 @@ class khoi:
         if pygame.time.get_ticks() - self.time_action > 200:
             self.time_action = pygame.time.get_ticks()
             for i in range(len(self.L_block)):
-                self.L_block[i][1] -= 1
+                self.L_block[i][1] += 1
 
 L_diagram = []
 for i in range(20):
@@ -61,6 +62,7 @@ def draw():
     if run:
         sc.blit(bg,(0,0))
         draw_diagram()
+        khoi1.draw()
         pygame.display.update()
 
 def event():
@@ -70,6 +72,12 @@ def event():
             run = False
             pygame.quit()
 
+def action():
+    khoi1.action()
+
+khoi1 = khoi()
+
 while run:
     event()
+    action()
     draw()
