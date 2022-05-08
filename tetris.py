@@ -1,4 +1,3 @@
-from re import L
 import pygame
 pygame.init()
 sc = pygame.display.set_mode((300,600))
@@ -22,13 +21,18 @@ yellow_vien = (165,165,0)
 L_color = [None,red,blue,green,purple,cyan,orange,yellow]
 L_covor_vien = [None,red_vien,blue_vien,green_vien,purple_vien,cyan_vien,orange_vien,yellow_vien]
 
+import random
+
+class khoi:
+    def __init__(self):
+        self.type = random.randint(1,7)
+        if self.type == 1:
+            rd_x = random.randint(0,8)
+            self.L_block = [(rd_x,-1),(rd_x+1,-1),(rd_x+1,0),(rd_x,0)]
+
 L_diagram = []
 for i in range(20):
     L_diagram.append([0]*10)
-L_diagram[10][5] = 7
-L_diagram[11][5] = 7
-L_diagram[12][5] = 7
-L_diagram[13][5] = 7
 
 bg = pygame.Surface((300,600))
 for x in range(10):
