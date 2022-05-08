@@ -19,7 +19,7 @@ orange_vien = (165,70,0)
 yellow_vien = (165,165,0)
 
 L_color = [None,red,blue,green,purple,cyan,orange,yellow]
-L_covor_vien = [None,red_vien,blue_vien,green_vien,purple_vien,cyan_vien,orange_vien,yellow_vien]
+L_color_vien = [None,red_vien,blue_vien,green_vien,purple_vien,cyan_vien,orange_vien,yellow_vien]
 
 import random
 
@@ -29,6 +29,10 @@ class khoi:
         if self.type == 1:
             rd_x = random.randint(0,8)
             self.L_block = [(rd_x,-1),(rd_x+1,-1),(rd_x+1,0),(rd_x,0)]
+    def draw(self):
+        for x,y in self.L_block:
+            pygame.draw.rect(sc,L_color[self.type],(x*30,y*30,30,30))
+            pygame.draw.rect(sc,L_color_vien[self.type],(x*30,y*30,30,30),2)
 
 L_diagram = []
 for i in range(20):
@@ -45,7 +49,7 @@ def draw_diagram():
             if L_diagram[y][x] != 0:
                 giatri = L_diagram[y][x]
                 pygame.draw.rect(sc,L_color[giatri],(x*30,y*30,30,30))
-                pygame.draw.rect(sc,L_covor_vien[giatri],(x*30,y*30,30,30),2)
+                pygame.draw.rect(sc,L_color_vien[giatri],(x*30,y*30,30,30),2)
 
 def draw():
     if run:
