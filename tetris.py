@@ -27,12 +27,13 @@ class khoi:
     def __init__(self):
         self.type = random.randint(1,7)
         self.type = 2
+        rd_x = 4
         if self.type == 1:
-            rd_x = random.randint(0,8)
             self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]]
         elif self.type -- 2:
-            rd_x = random.randint(0,8)
             self.L_block = [[rd_x,-2],[rd_x,-1],[rd_x,0],[rd_x+1,0]]
+        elif self.type == 3:
+            self.L_block = [[rd_x,-2],[rd_x,-1],[rd_x,0],[rd_x+1,0]]    
         self.time_action = 0    
     def draw(self):
         for x,y in self.L_block:
