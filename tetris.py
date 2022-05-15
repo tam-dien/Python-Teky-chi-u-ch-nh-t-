@@ -52,15 +52,18 @@ class khoi:
         if pygame.time.get_ticks() - self.time_action > 200:
             self.time_action = pygame.time.get_ticks()
             for i in range(len(self.L_block)):
-                self.L_block[i][1] += 1
-            for i in range(len(self.L_block)):
-                if self.L_block[i][1] == 19:
+                block = self.L_block[i].copy()
+                block[1] += 1
+                if block[1] == 20:
                     global khoi1
                     for i in range(len(self.L_block)):
                         self.L_block[i].append(self.type)
                         L_block.append(self.L_block[i].copy())
                     khoi1 = khoi()
                     return
+            for i in range(len(self.L_block)):
+                self.L_block[i][1] += 1
+            
     def event(self,e):
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_RIGHT:
