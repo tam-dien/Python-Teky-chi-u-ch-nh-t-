@@ -10,6 +10,7 @@ purple = (128,0,128)
 cyan = (0,255,255)
 orange = (255,165,0)
 yellow = (255,255,0)
+gray = (128,128,128)
 red_vien = (165,0,0)
 blue_vien = (0,0,165)
 green_vien = (0,165,0)
@@ -17,6 +18,7 @@ purple_vien = (50,0,50)
 cyan_vien = (0,165,165)
 orange_vien = (165,70,0)
 yellow_vien = (165,165,0)
+gray_vien = (78,78,78)
 
 L_color = [None,red,blue,green,purple,cyan,orange,yellow]
 L_color_vien = [None,red_vien,blue_vien,green_vien,purple_vien,cyan_vien,orange_vien,yellow_vien]
@@ -26,7 +28,6 @@ import random
 class khoi:
     def __init__(self):
         self.type = random.randint(1,7)
-        self.type = 7
         rd_x = 4
         if self.type == 1:
             self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]]
@@ -52,6 +53,14 @@ class khoi:
             self.time_action = pygame.time.get_ticks()
             for i in range(len(self.L_block)):
                 self.L_block[i][1] += 1
+            for i in range(len(self.L_block)):
+                if self.L_block[i][1] == 19:
+                    global khoi1
+                    for i in range(len(self.L_block)):
+                        self.L_block[i].append(self.type)
+                        L_block.append(self.L_block[i].copy())
+                    khoi1 = khoi()
+                    return
     def event(self,e):
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_RIGHT:
@@ -60,15 +69,28 @@ class khoi:
                         return
                 for i in range(len(self.L_block)):
                     self.L_block[i][0] += 1
+            if e.key == pygame.K_LEFT:
+                for i in range(len(self.L_block)):
+                    if self.L_block[i][0] - 1 < 0:
+                        return
+                for i in range(len(self.L_block)):
+                    self.L_block[i][0] -= 1
 
 L_diagram = []
 for i in range(20):
     L_diagram.append([0]*10)
 
+L_block = []
+
 bg = pygame.Surface((300,600))
 for x in range(10):
     for y in range(20):
         pygame.draw.rect(bg,(255,255,255),(x*30,y*30,30,30),2)
+
+def draw_L_block():
+    for x,y,cl in L_block:
+        pygame.draw.rect(sc,L_color[cl],(x*30,y*30,30,30))
+        pygame.draw.rect(sc,L_color_vien[cl],(x*30,y*30,30,30),2)
 
 def draw_diagram():
     for x in range(10):
@@ -82,6 +104,7 @@ def draw():
     if run:
         sc.blit(bg,(0,0))
         draw_diagram()
+        draw_L_block()
         khoi1.draw()
         pygame.display.update()
 
