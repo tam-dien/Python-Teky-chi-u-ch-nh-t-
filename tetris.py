@@ -52,6 +52,11 @@ class khoi:
             self.time_action = pygame.time.get_ticks()
             for i in range(len(self.L_block)):
                 self.L_block[i][1] += 1
+    def event(self,e):
+        if e.type == pygame.KEYDOWN:
+            if e.key == pygame.K_RIGHT:
+                for i in range(len(self.L_block)):
+                    self.L_block[i][0] += 1
 
 L_diagram = []
 for i in range(20):
@@ -83,6 +88,7 @@ def event():
             global run
             run = False
             pygame.quit()
+        khoi1.event(e)
 
 def action():
     khoi1.action()
