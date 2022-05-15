@@ -56,6 +56,9 @@ class khoi:
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_RIGHT:
                 for i in range(len(self.L_block)):
+                    if self.L_block[i][0] + 1 > 9:
+                        return
+                for i in range(len(self.L_block)):
                     self.L_block[i][0] += 1
 
 L_diagram = []
