@@ -44,12 +44,13 @@ class khoi:
         elif self.type == 7:
             self.L_block = [[rd_x-2,-1],[rd_x-1,-1],[rd_x,-1],[rd_x+1,-1]]
         self.time_action = 0
+        self.time_down = 200
     def draw(self):
         for x,y in self.L_block:
             pygame.draw.rect(sc,L_color[self.type],(x*30,y*30,30,30))
             pygame.draw.rect(sc,L_color_vien[self.type],(x*30,y*30,30,30),2)
     def action(self):
-        if pygame.time.get_ticks() - self.time_action > 200:
+        if pygame.time.get_ticks() - self.time_action > self.time_down:
             self.time_action = pygame.time.get_ticks()
             for i in range(len(self.L_block)):
                 block = self.L_block[i].copy()
@@ -68,16 +69,31 @@ class khoi:
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_RIGHT:
                 for i in range(len(self.L_block)):
-                    if self.L_block[i][0] + 1 > 9:
+                    x,y = self.L_block[i]
+                    if x + 1 > 9 or check_L_block((x+1,y)):
                         return
                 for i in range(len(self.L_block)):
                     self.L_block[i][0] += 1
             if e.key == pygame.K_LEFT:
                 for i in range(len(self.L_block)):
-                    if self.L_block[i][0] - 1 < 0:
+                    x,y = self.L_block[i]
+                    if x - 1 < 0 or check_L_block((x-1,y)):
                         return
                 for i in range(len(self.L_block)):
                     self.L_block[i][0] -= 1
+            if e.key == pygame.K_DOWN:
+                self.time_down = 50
+        if e.type == pygame.KEYUP:
+            if e.key == pygame.K_DOWN:
+                self.time_down = 200
+    def calc_center(self):
+        xkq, ykq = 0
+        for x,y in self.L_block:
+            xkq += x
+            ykq += y
+        xkq /= 4
+        ykq /= 4
+        return xkq,ykq
 
 def check_L_block(block):
     xb, yb = block
