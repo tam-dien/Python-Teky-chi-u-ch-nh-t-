@@ -1,4 +1,2 @@
-a = input("nhập:")
-so1,so2 = a.split("\t")
-print(so1)
-print(so2)
+a = 5
+a += 3
