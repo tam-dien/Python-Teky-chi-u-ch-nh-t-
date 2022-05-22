@@ -29,7 +29,6 @@ class khoi:
     def __init__(self):
         self.type = random.randint(1,7)
         rd_x = 4
-        self.type = 7
         if self.type == 1: # khói vuông
             self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]] 
         elif self.type == 2: # khói L phải
@@ -84,17 +83,51 @@ class khoi:
                     self.L_block[i][0] -= 1
             if e.key == pygame.K_DOWN:
                 self.time_down = 50
+            if e.key == pygame.K_UP:
+                self.xoay()
         if e.type == pygame.KEYUP:
             if e.key == pygame.K_DOWN:
                 self.time_down = 200
-    def calc_center(self):
-        xkq, ykq = 0
-        for x,y in self.L_block:
-            xkq += x
-            ykq += y
-        xkq /= 4
-        ykq /= 4
-        return xkq,ykq
+    def kc(self,k,kct):
+        x,y = k
+        x_ct,y_ct = kct
+        return ((x - x_ct)**2 + (y - y_ct)**2)**0.5
+    def xoay_cuthe(self,k,kct):
+        x, y = k
+        x_ct,y_ct = kct
+        if self.kc(k,kct) == 1:
+            if (x == x_ct and y - y_ct == -1):
+                return [x + 1, y + 1]
+            if (x - x_ct == 1 and y == y_ct):
+                return [x - 1, y + 1]
+            if (x == x_ct and y - y_ct == 1):
+                return [x - 1, y - 1]
+            if (x - x_ct == -1 and y == y_ct):
+                return [x + 1, y - 1]
+        if self.kc(k,kct) == 2:
+            if (x == x_ct and y - y_ct == -2):
+                return [x + 2, y + 2]
+            if (x - x_ct == 2 and y == y_ct):
+                return [x - 2, y + 2]
+            if (x == x_ct and y - y_ct == 2):
+                return [x - 2, y - 2]
+            if (x - x_ct == -2 and y == y_ct):
+                return [x + 2, y - 2]
+        if (x - x_ct -- 1 and y - y_ct == -1): # chéo trên phải
+            return [x,y+2]
+        if (x - x_ct -- 1 and y - y_ct == 1): # chéo dưới phải
+            return [x-2,y]
+        if (x - x_ct -- -1 and y - y_ct == 1): # chéo dưới trái
+            return [x,y-2]
+        if (x - x_ct -- -1 and y - y_ct == -1): # chéo trên trái
+            return [x+2,y]
+            
+    def xoay(self):
+        for i in range(len(self.L_block)):
+            if i != 1:
+                kq = self.xoay_cuthe(self.L_block[i],self.L_block[1])
+                if kq != None:
+                    self.L_block[i] = kq
 
 def check_L_block(block):
     xb, yb = block
