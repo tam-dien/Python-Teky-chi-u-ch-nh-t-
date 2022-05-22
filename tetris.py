@@ -54,7 +54,7 @@ class khoi:
             for i in range(len(self.L_block)):
                 block = self.L_block[i].copy()
                 block[1] += 1
-                if block[1] == 20:
+                if block[1] == 20 or check_L_block(block):
                     global khoi1
                     for i in range(len(self.L_block)):
                         self.L_block[i].append(self.type)
@@ -78,6 +78,13 @@ class khoi:
                         return
                 for i in range(len(self.L_block)):
                     self.L_block[i][0] -= 1
+
+def check_L_block(block):
+    xb, yb = block
+    for x,y,color in L_block:
+        if (xb,yb) == (x,y):
+            return True
+    return False
 
 L_diagram = []
 for i in range(20):
