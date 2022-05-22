@@ -29,19 +29,20 @@ class khoi:
     def __init__(self):
         self.type = random.randint(1,7)
         rd_x = 4
-        if self.type == 1:
-            self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]]
-        elif self.type == 2:
+        self.type = 7
+        if self.type == 1: # khói vuông
+            self.L_block = [[rd_x,-1],[rd_x+1,-1],[rd_x+1,0],[rd_x,0]] 
+        elif self.type == 2: # khói L phải
             self.L_block = [[rd_x,-2],[rd_x,-1],[rd_x,0],[rd_x+1,0]]
-        elif self.type == 3:
+        elif self.type == 3: # khói L trái
             self.L_block = [[rd_x,-2],[rd_x,-1],[rd_x,0],[rd_x-1,0]]
-        elif self.type == 4:
+        elif self.type == 4: # khói xe tăng
             self.L_block = [[rd_x-1,0],[rd_x,0],[rd_x,1],[rd_x,-1]]
-        elif self.type == 5:
+        elif self.type == 5: # khối z nghịch
             self.L_block = [[rd_x-1,-2],[rd_x-1,-1],[rd_x,-1],[rd_x,0]]
-        elif self.type == 6:
-            self.L_block = [[rd_x,-2],[rd_x-1,-1],[rd_x,-1],[rd_x-1,0]]
-        elif self.type == 7:
+        elif self.type == 6: # khối z thuận
+            self.L_block = [[rd_x,-2],[rd_x,-1],[rd_x-1,-1],[rd_x-1,0]]
+        elif self.type == 7: # khối ngang
             self.L_block = [[rd_x-2,-1],[rd_x-1,-1],[rd_x,-1],[rd_x+1,-1]]
         self.time_action = 0
         self.time_down = 200
